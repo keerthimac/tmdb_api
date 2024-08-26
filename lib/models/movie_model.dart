@@ -15,9 +15,9 @@ class MovieModel {
   factory MovieModel.fromJson(Map<String, dynamic> json) {
     return MovieModel(
         title: json['title'],
-        posterPath: json['poster_path'],
+        posterPath: 'https://image.tmdb.org/t/p/w500${json['poster_path']}',
         backdropPath: 'https://image.tmdb.org/t/p/w500${json['backdrop_path']}',
-        overview: 'https://image.tmdb.org/t/p/w500${json['overview']}',
+        overview: json['overview'],
         voteAverage: json['vote_average']);
   }
 }
