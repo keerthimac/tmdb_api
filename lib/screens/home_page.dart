@@ -171,9 +171,7 @@ class _HomePageState extends State<HomePage> {
                   }
                   List<MovieModel> movies = snapshot.data!;
 
-                  return 
-                  
-                  SingleChildScrollView(
+                  return SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
                           children: movies.take(5).map(
@@ -202,6 +200,81 @@ class _HomePageState extends State<HomePage> {
                                       style: TextStyle(
                                           color: Colors.grey.shade300,
                                           fontWeight: FontWeight.bold),
+                                    )
+                                  ],
+                                )),
+                          );
+                        },
+                      ).toList()));
+                },
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              const Text(
+                "Top Rated",
+                style:
+                    TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
+              ),
+              const Divider(),
+              FutureBuilder(
+                future: ApiService().getTopRatedMovies(),
+                builder: (BuildContext context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const CupertinoActivityIndicator();
+                  }
+                  if (snapshot.hasError) {
+                    // Handle the error case
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  }
+
+                  if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    // Handle the case where there is no data
+                    return const Center(
+                        child: Text('No movies available',
+                            style: TextStyle(color: Colors.white)));
+                  }
+                  List<MovieModel> movies = snapshot.data!;
+
+                  return SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                          children: movies.take(5).map(
+                        (movie) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                                alignment: Alignment.centerLeft,
+                                width: 250,
+                                height: 110,
+                                decoration: BoxDecoration(
+                                    color: Colors.grey.shade900,
+                                    borderRadius: BorderRadius.circular(12)),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Image.network(
+                                        movie.posterPath,
+                                        // fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
+                                    Column(
+                                      children: [
+                                        SizedBox(
+                                          width: 160,
+                                          child: Text(
+                                            movie.title,
+                                            style: TextStyle(
+                                                color: Colors.grey.shade300,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                      ],
                                     )
                                   ],
                                 )),
