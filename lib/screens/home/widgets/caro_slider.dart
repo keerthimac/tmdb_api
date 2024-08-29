@@ -1,7 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 import 'package:tmdb_api/models/movie_model.dart';
 import 'package:tmdb_api/screens/movie_view/movie_view.dart';
 import 'package:tmdb_api/services/api_service.dart';

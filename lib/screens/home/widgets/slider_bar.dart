@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tmdb_api/models/movie_model.dart';
 import 'package:tmdb_api/screens/movie_view/movie_view.dart';
-import 'package:tmdb_api/services/api_service.dart';
 
 class SliderBar extends StatelessWidget {
   const SliderBar({
